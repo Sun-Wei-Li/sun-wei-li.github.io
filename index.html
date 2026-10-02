@@ -23,7 +23,12 @@
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-name">Teacher Ben 📝</div>
-    <div class="nav-links">
+    <!-- Menu button: only visible on phones (see styles.css, section 12) -->
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Menu</span>
+    </button>
+    <div class="nav-links" id="nav-links">
       <a href="#philosophy">Philosophy</a>
       <a href="#classroom">Classroom</a>
       <a href="#lessons">Lessons</a>
@@ -41,7 +46,7 @@
        HERO
        ========================================================= -->
   <section class="hero">
-    <div>
+    <div class="hero-text">
       <div class="eyebrow-tag"><span class="dot"></span>Language teacher since 2018 · ESL in Taiwan</div>
       <h1>Hi, I'm Ben —<br>I teach <span class="u1">young learners</span> to love <span class="u2">English</span>.</h1>
       <p class="name-note">Bourhan Eddine Nouari, but my students just call me <strong>Ben</strong>.</p>
@@ -565,6 +570,23 @@
      FOOTER
      ========================================================= -->
 <footer>Teacher Ben · ESL Teacher, Taiwan · Student faces are hidden to protect their privacy.</footer>
+
+<!-- Phone menu: open/close the section links, and close after a link is tapped -->
+<script>
+  (function () {
+    var nav = document.querySelector('.nav');
+    var btn = nav.querySelector('.nav-toggle');
+    function setOpen(open) {
+      nav.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+      btn.querySelector('span').textContent = open ? 'Close' : 'Menu';
+    }
+    btn.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    nav.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+  })();
+</script>
 
 <!-- Click-to-play YouTube: shows a thumbnail first and only loads the player when clicked.
      Without JavaScript, the thumbnail simply links to the video on YouTube. -->
