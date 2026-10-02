@@ -1,0 +1,12 @@
+# Lesson videos are hosted on YouTube, so do not upload the local copies
+*.mp4
+
+# Word lock / temp files
+~$*
+*.tmp
+
+# Original classroom photos stay private; the site uses the cleaned copies in images/
+In the Classroom photos/
+
+# Full teaching philosophy essay stays private
+*teaching philosophy*.docx

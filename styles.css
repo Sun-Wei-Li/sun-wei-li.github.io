@@ -1,0 +1,770 @@
+/* =========================================================
+   TEACHER BEN — ESL TEACHER PORTFOLIO
+   Stylesheet
+   =========================================================
+   How this file is organized (search for these headers):
+     1. Theme variables (colors, light/dark mode)
+     2. Base / reset
+     3. Nav bar
+     4. Hero section
+     5. Section shell (shared heading style used everywhere)
+     6. Philosophy section
+     7. Lesson plan cards + YouTube players
+     8. Classroom gallery
+     9. Credentials / experience list
+     10. Testimonials + teacher tips
+     11. Contact / footer
+     12. Responsive (mobile) overrides
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. THEME VARIABLES
+   Change colors here and they update everywhere on the site.
+   --------------------------------------------------------- */
+:root {
+  box-sizing: border-box;
+  --paper: #FBF6EA;       /* main background */
+  --paper-alt: #F3ECD9;   /* slightly darker background (cards, slots) */
+  --ink: #23302B;         /* main text color */
+  --ink-soft: #4C5A52;    /* secondary/muted text color */
+  --green: #2F6F5E;
+  --green-deep: #1F4D40;
+  --yellow: #EFAF25;
+  --coral: #E1613F;
+  --line: #DED2AF;        /* borders / dividers */
+  --card-bg: #FFFEF9;
+  --shadow: none;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Automatically switches to a dark palette if the visitor's system is in dark mode */
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --paper: #1B221E;
+    --paper-alt: #212A24;
+    --ink: #EDEBDD;
+    --ink-soft: #B7C1B8;
+    --green: #59B499;
+    --green-deep: #3E8873;
+    --yellow: #F0BB44;
+    --coral: #E87F5E;
+    --line: #37423C;
+    --card-bg: #222B25;
+  }
+}
+
+/* Force dark mode by adding data-theme="dark" to the <html> tag */
+:root[data-theme="dark"] {
+  --paper: #1B221E;
+  --paper-alt: #212A24;
+  --ink: #EDEBDD;
+  --ink-soft: #B7C1B8;
+  --green: #59B499;
+  --green-deep: #3E8873;
+  --yellow: #F0BB44;
+  --coral: #E87F5E;
+  --line: #37423C;
+  --card-bg: #222B25;
+}
+
+/* ---------------------------------------------------------
+   2. BASE / RESET
+   --------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px));
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Literata', Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+  font-weight: 600;
+  line-height: 1.12;
+  margin: 0;
+  color: var(--ink);
+}
+
+a { color: inherit; }
+
+img, svg { max-width: 100%; display: block; }
+
+/* Centered content container used inside every section */
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------------------------------------------------------
+   3. NAV BAR
+   --------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  background: var(--paper);
+  border-bottom: 2px solid var(--line);
+}
+.nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-name {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 7px 13px;
+  border-radius: 8px 8px 0 0;
+  color: var(--ink-soft);
+  border: 2px solid transparent;
+  border-bottom: none;
+  transition: color .15s ease;
+}
+.nav-links a:hover { color: var(--green-deep); }
+.nav-links a:focus-visible, a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   4. HERO SECTION
+   --------------------------------------------------------- */
+.hero {
+  padding: 64px 0 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: rise .7s ease forwards .05s;
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+.eyebrow-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--paper-alt);
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 14px 5px 6px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+.eyebrow-tag .dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--coral);
+}
+
+.hero h1 {
+  font-size: clamp(2.3rem, 4.6vw, 3.4rem);
+  letter-spacing: -0.01em;
+}
+.hero h1 .u1 { color: var(--green-deep); }
+.hero h1 .u2 { color: var(--coral); }
+
+.hero p.name-note {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin: 12px 0 0;
+}
+.hero p.name-note strong { color: var(--coral); font-weight: 600; }
+
+.hero p.lede {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin-top: 18px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.btn {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+.btn-solid {
+  background: var(--green-deep);
+  color: #FBF6EA;
+}
+.btn-outline {
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+/* Dashed placeholder box for the hero photo — swap for a real <img> when ready */
+.photo-slot {
+  aspect-ratio: 4/5;
+  border-radius: 18px;
+  border: 3px dashed var(--line);
+  background: var(--paper-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.92rem;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  transform: rotate(1.2deg);
+}
+.photo-slot .tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 70px;
+  height: 26px;
+  background: rgba(239, 175, 37, 0.55);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Real hero photo — taped-polaroid look */
+.photo-frame {
+  margin: 0;
+  position: relative;
+  transform: rotate(1.2deg);
+  background: var(--card-bg);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  padding: 10px;
+}
+.photo-frame img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: 50% center;
+  border-radius: 12px;
+}
+.photo-frame .tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 70px;
+  height: 26px;
+  background: rgba(239, 175, 37, 0.55);
+  border: 1px solid rgba(0,0,0,0.05);
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------
+   5. SECTION SHELL
+   Shared "tab label + heading" style used at the top of
+   Classroom, Credentials, Lessons and Testimonials sections.
+   --------------------------------------------------------- */
+section { padding: 56px 0; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 14px;
+}
+.tab-label {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 4px 11px;
+  border-radius: 6px;
+  color: #FBF6EA;
+  white-space: nowrap;
+}
+.section-head h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+.section-intro {
+  color: var(--ink-soft);
+  max-width: 70ch;
+  margin: -12px 0 26px;
+}
+
+/* ---------------------------------------------------------
+   6. PHILOSOPHY SECTION
+   --------------------------------------------------------- */
+.philosophy blockquote {
+  margin: 0;
+  font-family: 'Literata', serif;
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 62ch;
+  border-left: 4px solid var(--yellow);
+  padding-left: 24px;
+}
+.philosophy p.attrib {
+  margin-top: 16px;
+  font-family: 'Fredoka', sans-serif;
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  padding-left: 28px;
+}
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+}
+.pillar {
+  background: var(--paper-alt);
+  border-radius: 14px;
+  padding: 20px;
+}
+.pillar-ic {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 12px;
+}
+.pillar h3 { font-size: 1.08rem; margin-bottom: 6px; }
+.pillar p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+/* ---------------------------------------------------------
+   7. LESSON PLAN CARDS
+   --------------------------------------------------------- */
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.lesson-card {
+  background: var(--card-bg);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.lesson-card .strip {
+  height: 8px;
+  width: 100%;
+}
+.lesson-card .body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+.lesson-card .kind {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.lesson-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+.lesson-card p { color: var(--ink-soft); font-size: 0.96rem; flex: 1; }
+/* Click-to-play YouTube thumbnail (swapped for an iframe by the script in index.html) */
+.yt, .yt-frame {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 0;
+  background: #000;
+}
+.yt img { width: 100%; height: 100%; object-fit: cover; opacity: .92; transition: opacity .15s ease; }
+.yt:hover img { opacity: 1; }
+.yt .play-ic {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px; height: 58px;
+  color: #FBF6EA;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+}
+.lesson-card details {
+  margin-top: 4px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.lesson-card summary {
+  cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lesson-card details ul { padding-left: 18px; margin: 8px 0 0; }
+.lesson-card details li { margin-bottom: 4px; }
+.lesson-card details strong { color: var(--ink); }
+.lesson-card[hidden] { display: none; }
+.more-note {
+  margin: 22px 0 0;
+  padding: 14px 18px;
+  background: var(--paper-alt);
+  border-radius: 12px;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+.more-note a {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 2px solid var(--yellow);
+}
+.lesson-card .link {
+  margin-top: 14px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--green-deep);
+  text-decoration: none;
+  border-bottom: 2px solid var(--yellow);
+  align-self: start;
+  padding-bottom: 1px;
+}
+
+/* ---------------------------------------------------------
+   8. CLASSROOM GALLERY + VIDEO SLOTS
+   --------------------------------------------------------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.gallery-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid var(--line);
+}
+.img-slot {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 3px dashed var(--line);
+  background: var(--paper-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.82rem;
+  text-align: center;
+  padding: 10px;
+}
+.video-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.video-slot {
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  border: 3px dashed var(--line);
+  background: var(--paper-alt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 10px;
+}
+.play-ic {
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--coral);
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------------------------------------------------------
+   9. CREDENTIALS LIST
+   --------------------------------------------------------- */
+.cred-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 30px;
+}
+.cred-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.toolkit { margin-top: 10px; }
+.cred-list .badge {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: var(--green-deep);
+  color: #FBF6EA;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem;
+}
+.cred-list strong { font-family: 'Fredoka', sans-serif; font-weight: 600; display:block; }
+.cred-list span { color: var(--ink-soft); font-size: 0.92rem; }
+
+/* Experience timeline */
+.timeline {
+  list-style: none;
+  margin: 0 0 34px;
+  padding: 0;
+  border-left: 3px solid var(--line);
+}
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 4px 24px;
+  padding: 0 0 26px 26px;
+}
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -9px; top: 6px;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--green);
+}
+.timeline li:nth-child(-n+2)::before { background: var(--green); }
+.timeline .when {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--green-deep);
+  padding-top: 2px;
+}
+.timeline strong { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 1.1rem; display: block; }
+.timeline .where { color: var(--ink-soft); font-size: 0.92rem; }
+.timeline p { margin: 6px 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+/* Certificates */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.cert-card {
+  background: var(--card-bg);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .15s ease, transform .15s ease;
+}
+.cert-card:hover { border-color: var(--green); transform: translateY(-2px); }
+.cert-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  background: var(--paper-alt);
+  padding: 10px;
+}
+.cert-body { padding: 14px 16px 18px; }
+.cert-card .kind {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+.cert-card h3 { font-size: 1rem; }
+.cert-card p { color: var(--ink-soft); font-size: 0.95rem; margin: 10px 0 0; }
+.cert-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+}
+.cert-featured img { aspect-ratio: auto; height: 100%; padding: 16px; }
+.cert-featured .cert-body { padding: 22px 26px; }
+.cert-featured h3 { font-size: 1.35rem; }
+
+/* ---------------------------------------------------------
+   10. TESTIMONIALS
+   --------------------------------------------------------- */
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.testi-card {
+  background: var(--paper-alt);
+  border-radius: 14px;
+  padding: 24px;
+}
+.testi-card p.quote {
+  font-style: italic;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.testi-card .who {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* Teacher tips */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.tip-card {
+  background: var(--card-bg);
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.tip-num {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  color: #FBF6EA;
+  background: var(--green-deep);
+  border-radius: 6px;
+  padding: 3px 10px;
+  align-self: start;
+  margin-bottom: 10px;
+}
+.tip-card h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.tip-card p { font-size: 0.96rem; color: var(--ink-soft); margin: 10px 0 0; }
+.tip-card .tip-meta { font-family: 'Fredoka', sans-serif; font-size: 0.85rem; margin-top: 4px; }
+.tip-card .tip-meta strong { color: var(--ink); font-weight: 600; }
+.milestones {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 4px;
+  display: grid;
+  gap: 8px;
+  font-size: 0.93rem;
+}
+.milestones li {
+  background: var(--paper-alt);
+  border-left: 4px solid var(--yellow);
+  border-radius: 0 8px 8px 0;
+  padding: 8px 12px;
+}
+.milestones strong { font-family: 'Fredoka', sans-serif; font-weight: 600; }
+.tip-card .link {
+  margin-top: auto;
+  padding-top: 16px;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------
+   11. CONTACT / FOOTER
+   --------------------------------------------------------- */
+.contact {
+  background: var(--green-deep);
+  color: #FBF6EA;
+  border-radius: 20px;
+  padding: 44px 36px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.contact h2 { color: #FBF6EA; font-size: clamp(1.5rem, 2.8vw, 2.1rem); }
+.contact p { color: #DCEAE4; margin-top: 10px; max-width: 42ch; }
+.contact-links { display: flex; flex-direction: column; gap: 10px; }
+.contact-links a {
+  overflow-wrap: anywhere;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  color: #FBF6EA;
+  border-bottom: 2px solid rgba(251,246,234,0.35);
+  padding-bottom: 2px;
+  width: fit-content;
+}
+footer {
+  text-align: center;
+  padding: 30px 0 50px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+/* ---------------------------------------------------------
+   12. RESPONSIVE (MOBILE) OVERRIDES
+   --------------------------------------------------------- */
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 30px; }
+  .hero .photo-slot, .hero .photo-frame { max-width: 300px; margin: 0 auto; }
+  .lesson-grid, .video-row, .cred-list, .testi-grid, .tips-grid, .pillars { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .cert-featured { grid-template-columns: 1fr; }
+  .timeline li { grid-template-columns: 1fr; padding-left: 20px; }
+  .contact { grid-template-columns: 1fr; text-align: left; }
+  .nav-inner { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .pillars, .cert-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero { animation: none; opacity: 1; transform: none; }
+}
